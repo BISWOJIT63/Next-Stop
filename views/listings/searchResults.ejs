@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerplate") %>
+
+<h6>Search Results for "<%= searchQuery %>"</h6>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <% if (listings.length === 0) { %>
+    <p>No Stoppage found.</p>
+  <% } else { %>
+    <% listings.forEach(listing => { %>
+      <a href="/listings/<%= listing._id %>" class="index-links">
+        <div class="card posts col">
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= listing.title %></h5>
+            <p class="card-text">₹<%= listing.price %> / night</p>
+          </div>
+        </div>
+      </a>
+    <% }) %>
+  <% } %>
+</div>
