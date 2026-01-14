@@ -10,7 +10,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -26,7 +26,7 @@ const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
 
 // ---------- Database ----------
-const dburl = process.env.ATLASDB_URL ;
+const dburl = process.env.ATLASDB_URL;
 async function main() {
   try {
     await mongoose.connect(dburl);
@@ -38,20 +38,17 @@ async function main() {
 main();
 
 // ---------- Middleware ----------
-app.use(cookieParser("mysecretcode"));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-const store =MongoStore.create({
-  mongoUrl : dburl,
-  crypto:{
-  secret: process.env.SECRET,
-  },
-  touchAfter : 24 * 3600 ,
+const store = MongoStore.create({
+  mongoUrl: dburl,
+  touchAfter: 24 * 3600,
 });
-store.on("err",()=>{
-  console.log("error at connection between session and db ")
+store.on("err", () => {
+  console.log("error at connection between session and db ");
 });
 
 const sessionOptions = {
@@ -68,18 +65,18 @@ app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// ---------- Passport ----------
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ---------- Flash & Current User ----------
 app.use((req, res, next) => {
-  res.locals.successMsg = req.flash("success");
-  res.locals.errorMsg = req.flash("error");
-  res.locals.curUser = req.user;
+  res.locals.successMsg = req.flash("success") || [];
+  res.locals.errorMsg = req.flash("error") || [];
+  res.locals.curUser = req.user || null;
+  res.locals.currentPath = req.originalUrl || req.path || "";
   next();
 });
 
@@ -106,6 +103,5 @@ app.use((err, req, res, next) => {
 });
 
 // ---------- Start Server ----------
-app.listen(9000, () => {
-  console.log("Server is listening on port 9000");
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);

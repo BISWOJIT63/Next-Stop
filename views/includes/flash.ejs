@@ -1,17 +1,20 @@
-<% if (successMsg && successMsg.length > 0) { %>
-  <% successMsg.forEach(msg => { %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <%= msg %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% }) %>
-<% } %>
+<% const _success=(typeof successMsg !=='undefined' && Array.isArray(successMsg)) ? successMsg : []; %>
+  <% const _error=(typeof errorMsg !=='undefined' && Array.isArray(errorMsg)) ? errorMsg : []; %>
 
-<% if (errorMsg && errorMsg.length > 0) { %>
-  <% errorMsg.forEach(msg => { %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <%= msg %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% }) %>
-<% } %>
+    <% if (_success.length> 0) { %>
+      <% _success.forEach(msg=> { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= msg %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% }) %>
+          <% } %>
+
+            <% if (_error.length> 0) { %>
+              <% _error.forEach(msg=> { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <%= msg %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% }) %>
+                  <% } %>

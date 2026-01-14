@@ -3,8 +3,6 @@
    ================================== */
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -50,6 +48,43 @@ h2 {
 }
 
 /* ==================================
+   NAVBAR LAYOUT FIX
+   ================================== */
+
+.navbar .container-fluid {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-collapse {
+  display: flex !important;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.navbar-collapse ul:last-child {
+  margin-left: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-brand {
+  flex-shrink: 0;
+}
+
+form[role="search"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+}
+
+/* ==================================
    BUTTON STYLES
    ================================== */
 
@@ -58,7 +93,7 @@ h2 {
   background-color: rgb(20, 201, 201);
   color: white;
   border: none;
-  border-radius: 50px; /* Pill shape */
+  border-radius: 50px;
   padding: 0 20px;
 }
 
@@ -66,20 +101,22 @@ h2 {
   background-color: rgb(15, 160, 160);
   color: white;
 }
+
 .search-bar {
-  border-radius: 50px; /* Pill shape */
-  width: 300px;
+  border-radius: 50px;
+  max-width: 280px;
+  width: 100%;
 }
 
-/* Reusable Authentication Button Style (Login/Signup/Logout) */
+/* Reusable Authentication Button Style */
 .auth-btn {
   background-color: rgb(20, 201, 201);
-  color: white !important; /* !important overrides default link color */
+  color: white !important;
   padding: 8px 15px;
-  border-radius: 50px; /* Pill shape */
+  border-radius: 50px;
   text-decoration: none;
   transition: background-color 0.3s;
-  display: inline-block; /* Ensures padding is applied correctly */
+  display: inline-block;
 }
 
 .auth-btn:hover {
@@ -188,15 +225,14 @@ h2 {
   color: #222222;
 }
 
+/* ==================================
+   FILTER STYLES
+   ================================== */
 #filters .filter {
   display: flex;
-  /* make the container horizontal */
   gap: 30px;
-  /* space between each filter item */
   flex-wrap: nowrap;
-  /* all items stay in one line */
   overflow-x: auto;
-  /* allow horizontal scrolling if needed */
 }
 
 .filter {
@@ -206,7 +242,6 @@ h2 {
 .filter-item {
   display: flex;
   flex-direction: column;
-  /* icon on top, text below */
   align-items: center;
   text-align: center;
   cursor: pointer;

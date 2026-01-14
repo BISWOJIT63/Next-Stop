@@ -1,17 +1,17 @@
 <% layout("/layouts/boilerplate") %>
-<script>
-  const mapToken = "<%=process.env.MAP_TOKEN %>";
-  const listing = <%- JSON.stringify(listing) %>;
-</script>
+  <script>
+    const mapToken = "<%=process.env.MAP_TOKEN %>";
+    const listing = <% - JSON.stringify(listing) %>;
+  </script>
   <br>
 
   <body>
-    <h3 class="offset-3">
+    <h3 class="text-center text-md-start">
       <%= listing.title %>
     </h3>
-    <div class="row">
-      <div class="col-8 offset-3">
-        <div class="show-card" style="width: 25rem;">
+    <div class="row g-4">
+      <div class="col-12 col-md-8">
+        <div class="show-card">
           <img src="<%= listing.image.url %>" class="show-card-img-top show-img" alt="listing_image">
           <div class="card-body">
             <br>
@@ -43,7 +43,7 @@
             <% if(curUser) { %>
               <hr class="col-8">
               <form method="POST" action="/listings/<%= listing.id %>/reviews" class="needs-validation" novalidate>
-                <div class="form-group col-8">
+                <div class="form-group col-12 col-md-8">
                   <label for="review">Reviews</label><br>
                   <fieldset class="starability-basic">
                     <legend>First rating:</legend>
@@ -75,7 +75,7 @@
           <div class="row">
             <h4>All reviews:</h4><br>
             <% listing.Review.forEach(review=> { %>
-              <div class="card reviwe-card col-5 mb-3 ms-3">
+              <div class="card reviwe-card col-12 col-md-5 mb-3 ms-md-3">
                 <div class="card-body">
                   <h5 class="card-title">@<%= review.author.username %>
                   </h5>
@@ -95,7 +95,7 @@
           </div>
           <% } %>
     </div>
-    <div class="col-8 offset-3 mb-5">
+    <div class="col-12 col-md-8 mb-5">
       <h5 class="card-title">Location</h5>
       <br>
       <p class="card-text " style="color: rgb(55, 56, 56)">Exact location will be shared after booking</p>
